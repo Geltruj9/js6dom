@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjetas de Usuario</title>
+    <script src="/style.css"> </script>
+    <script src="/j6dom.js"> </script>
+    <style>
+        /* Estilos para las tarjetas */
+        .user-card {
+            border: 1px solid #8a2323;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 5px;
+            background-color: #baa6a6;
+            max-width: 300px;
+        }
+
+        .user-card h2 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .user-card h3 {
+            font-size: 1.2em;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        .user-card ul {
+            padding-left: 20px;
+        }
+
+        .user-card ul li {
+            list-style-type: disc;
+            font-size: 0.9em;
+        }
+
+        /* Contenedor principal */
+        #user-cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+  
+    <h1>Tarjetas de Usuario</h1>
+    
+    <!-- Contenedor donde se agregarán las tarjetas -->
+    <div id="user-cards-container"></div>
+
+    <script> 
+        // Lista de usuarios
+const users = [{
+                id: 1,
+                user_name: 'juana',
+                description: 'fan',
+                age: '46',
+                fav_music: {
+                    bands: [
+                        'BSB', 'NSYNC', 'BLUE', 'WESTLIFE'
+                    ]
+                }
+            },
+            {
+                id: 2,
+                user_name: 'mari',
+                description: 'fanatica',
+                age: '23',
+                fav_music: {
+                    bands: [
+                       '1D', 'BTS', 'CD9', 'CNCO'
+                ]
+            }
+        
+        }
+    ]
+              
+        /**
+         * Función para crear una tarjeta de usuario.
+         * @param {Object} user - Objeto usuario con información personal.
+         * @returns {string} - HTML en formato string de la tarjeta.
+         */
+        const createUserCard = (user) => {
+            return `
+                <div class="user-card">
+                    <h2>${user.user_name} (${user.age} años)</h2>
+                    <p>${user.description}</p>
+                    <h3>Música Favorita:</h3>
+                    <ul>
+                        ${user.fav_music.bands.map(band => `<li>${band}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        };
+
+        /**
+         * Función para renderizar tarjetas de usuario.
+         * @param {Array} users - Lista de objetos usuario.
+         * @param {HTMLElement} container - Elemento HTML donde se agregarán las tarjetas.
+         */
+        const renderUserCards = (users, container) => {
+            container.innerHTML = users.map(createUserCard).join('');
+        };
+
+        /**
+         * Función principal para iniciar el programa de creación de tarjetas.
+         */
+        const initCardProgram = () => {
+            const container = document.getElementById('user-cards-container');
+            if (container) {
+                renderUserCards(users, container);
+            } else {
+                console.error('No se encontró el contenedor para las tarjetas de usuario.');
+            }
+        };
+
+        // Llamada para iniciar el programa
+        initCardProgram();
+    </script>    
+</body>
+</html>
